@@ -9,6 +9,7 @@ import string
 import signal
 from base64 import b64encode
 from network import get_speed
+from credentials import AUTH
 
 FORMAT = "%(asctime)s:%(levelname)s:%(name)s:%(message)s"
 datefmt = "%Y-%m-%d-%H:%M:%S"
@@ -67,7 +68,7 @@ async def run(url):
         network = await loop.run_in_executor(None, get_speed)
 
         data = json.dumps(format_jsonrpc(network))
-        auth = b64encode(b'')
+        auth = b64encode(AUTH)
         headers = {
             'Content-Type': 'application/json',
             'Authorization': 'Basic ' + auth.decode('utf-8')
